@@ -28,7 +28,11 @@
       ],
       "@payload-config": [
         "./src/payload.config.ts"
-      ]
+      ],
+      "@/payload.config": [
+        "./src/payload.config.ts"
+      ],
+      "next/*": ["./node_modules/next/*"]
     },
     "target": "ES2022",
   },

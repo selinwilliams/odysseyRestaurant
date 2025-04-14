@@ -11,9 +11,9 @@ services:
       - '3000'
     environment:
       - NODE_ENV=production  # Changed to production
-      - NEXT_PUBLIC_CMS_URL=https://odyssey.mareon.dev
-      - NEXT_PUBLIC_PAYLOAD_API_URL=https://odyssey.mareon.dev/api
-      - INTERNAL_PAYLOAD_API_URL=http://odyssey-cms:3001/api
+      - NEXT_PUBLIC_CMS_URL=https://api.odyssey.mareon.dev
+      - NEXT_PUBLIC_PAYLOAD_API_URL=https://api.odyssey.mareon.dev/
+      - INTERNAL_PAYLOAD_API_URL=http://odyssey-cms:3001/
     networks:
       - shared_portainer_network
     healthcheck:
@@ -29,7 +29,7 @@ services:
     container_name: odyssey-cms
     restart: unless-stopped
     expose:
-      - '3001'
+      - '3000'
     environment:
       - NODE_ENV=production  # Changed to production
       - PORT=3001

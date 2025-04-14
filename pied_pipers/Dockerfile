@@ -35,7 +35,7 @@ RUN npm run build
 FROM base AS runner
 WORKDIR /app
 
-ENV NODE_ENV=development
+ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
 # Create a non-root user
@@ -58,7 +58,7 @@ EXPOSE 3000
 
 # Set the environment variable for the port
 ENV PORT=3000
+ENV HOSTNAME="0.0.0.0"
 
-# Start the application
-
-CMD ["pnpm", "dev"]
+# Start the application in production mode
+CMD ["node", "server.js"]

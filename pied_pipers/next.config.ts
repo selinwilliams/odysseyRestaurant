@@ -12,22 +12,21 @@ const nextConfig = {
   },
   images: {
     remotePatterns: [
-      {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '3001',
-        pathname: '/api/media/**',
-      },
-      {
-        protocol: 'http',
-        hostname: 'odyssey-cms',
-        port: '3001',
-        pathname: '/api/media/**',
-      },
+      // {
+      //   protocol: 'http',
+      //   hostname: 'localhost',
+      //   port: '3001',
+      //   pathname: '/api/media/**',
+      // },
+      // {
+      //   protocol: 'http',
+      //   hostname: 'odyssey-cms',
+      //   port: '3001',
+      //   pathname: '/api/media/**',
+      // },
       {
         protocol: 'https',
-        hostname: 'odyssey.mareon.dev',
-        pathname: '/api/media/**',
+        hostname: '**.mareon.dev',
       },
     ],
   },

@@ -4,7 +4,6 @@ import PageHeader from '@/components/ui/PageHeader';
 import OurStory from '@/components/about/OurStory';
 import MeetTheChef from '@/components/about/MeetTheChef';
 import OurValues from '@/components/about/OurValues';
-import Gallery from '@/components/about/Gallery';
 import Testimonials from '@/components/about/Testimonials';
 import Card from '@/components/ui/Card';
 import SectionHeading from '@/components/ui/SectionHeading';

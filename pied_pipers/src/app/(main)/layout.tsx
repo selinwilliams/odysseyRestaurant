@@ -33,7 +33,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const isHomePage = pathname === '/';
+  // const isHomePage = pathname === '/';
 
   return (
     <html lang="en"  className={`${montserrat.variable} ${playfair.variable} ${cormorant.variable}`}>

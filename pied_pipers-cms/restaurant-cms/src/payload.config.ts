@@ -1,10 +1,7 @@
-// payload.config.ts
+import { buildConfig } from 'payload'
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
-import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
-import { buildConfig } from 'payload'
-import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 
 import { Users } from './collections/Users'
@@ -14,14 +11,11 @@ import { MenuItems } from './collections/MenuItems'
 import { ContactSubmissions } from './collections/ContactSubmissions'
 import { Reservations } from './collections/Reservations'
 
-const filename = fileURLToPath(import.meta.url)
-const dirname = path.dirname(filename)
-
 export default buildConfig({
   admin: {
     user: Users.slug,
     meta: {
-      titleSuffix: '- Admin Panel',
+      titleSuffix: '- Odyssey Admin',
       favicon: '/favicon.ico',
       ogImage: '/og-image.jpg',
     },
@@ -30,28 +24,45 @@ export default buildConfig({
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
-    outputFile: path.resolve(dirname, 'payload-types.ts'),
+    outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },
   db: mongooseAdapter({
     url: process.env.MONGODB_URL || '',
+    connectOptions: {
+      retryWrites: true,
+      serverSelectionTimeoutMS: 5000,
+      socketTimeoutMS: 45000,
+    },
   }),
   sharp,
   upload: {
     limits: {
       fileSize: 10000000, // 10MB
     },
-    // Use local filesystem for development
-    staticDir: path.resolve(dirname, '../media'),
+    staticDir: path.resolve(__dirname, '../media'),
     staticURL: '/media',
   },
-  plugins: [payloadCloudPlugin()],
   
-  // Add CORS configuration
-  cors:['http://localhost:3000'],
+  // Set the server URL from environment variable
+  serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || 'https://odyssey.mareon.dev',
+  
+  // Configure CORS to allow requests from your domain
+  cors: [
+    'https://odyssey.mareon.dev',
+    'http://localhost:3000',
+    'http://localhost:3001',
+  ],
 
-  // Keep the onInit for debugging but remove endpoints
+  // Add debug logging
+  debug: process.env.NODE_ENV !== 'production',
+  
+  // Add initialization logging
   onInit: async (payload) => {
-    console.log('Payload initialized');
+    console.log('Payload initialized with:');
+    console.log('- serverURL:', process.env.PAYLOAD_PUBLIC_SERVER_URL || 'https://odyssey.mareon.dev');
+    console.log('- NODE_ENV:', process.env.NODE_ENV);
+    console.log('- MONGODB_URL:', process.env.MONGODB_URL ? '[SET]' : '[NOT SET]');
+    console.log('- PAYLOAD_SECRET:', process.env.PAYLOAD_SECRET ? '[SET]' : '[NOT SET]');
     
     try {
       const users = await payload.find({
@@ -60,11 +71,8 @@ export default buildConfig({
       });
       
       console.log(`Found ${users.totalDocs} users in the database`);
-      if (users.totalDocs === 0) {
-        console.log('⚠️ No users found. You may need to create an admin user.');
-      }
     } catch (error) {
-      console.error('Error checking users:', error.message);
+      console.error('Error checking users:', error);
     }
   },
 })

@@ -1,7 +1,7 @@
 // app/api/reservations/route.ts
 import { NextResponse } from 'next/server';
 
-const PAYLOAD_URL = 'http://localhost:3001/api';
+const PAYLOAD_URL = process.env.INTERNAL_PAYLOAD_API_URL || 'http://localhost:3001/api';
 
 export async function POST(request: Request) {
     try {

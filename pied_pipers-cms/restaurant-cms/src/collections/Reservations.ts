@@ -1,5 +1,5 @@
 //collections/Reservations.ts
-import { CollectionConfig } from 'payload/types'
+import { CollectionConfig } from 'payload'
 
 export const Reservations: CollectionConfig = {
     slug: 'reservations',

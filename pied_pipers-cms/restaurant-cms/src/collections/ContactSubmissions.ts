@@ -1,4 +1,4 @@
-import { CollectionConfig } from 'payload/types';
+import { CollectionConfig } from 'payload';
 import { sendContactNotification } from '../utilities/mailer';
 
 export const ContactSubmissions: CollectionConfig = {

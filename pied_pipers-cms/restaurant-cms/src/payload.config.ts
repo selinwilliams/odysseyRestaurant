@@ -16,8 +16,6 @@ export default buildConfig({
     user: Users.slug,
     meta: {
       titleSuffix: '- Odyssey Admin',
-      favicon: '/favicon.ico',
-      ogImage: '/og-image.jpg',
     },
   },
   collections: [Users, Media, Categories, MenuItems, ContactSubmissions, Reservations],
@@ -35,12 +33,20 @@ export default buildConfig({
     },
   }),
   sharp,
+  
+  // Updated upload configuration for v3
   upload: {
     limits: {
       fileSize: 10000000, // 10MB
     },
-    staticDir: path.resolve(__dirname, '../media'),
-    staticURL: '/media',
+  },
+  
+  // New storage configuration for v3
+  storage: {
+    filesystem: {
+      directory: path.resolve(__dirname, '../media'),
+      staticURL: '/media',
+    },
   },
   
   // Set the server URL from environment variable

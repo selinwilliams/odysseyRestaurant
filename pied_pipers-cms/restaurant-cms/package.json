@@ -21,7 +21,7 @@
     "@payloadcms/payload-cloud": "latest",
     "@payloadcms/richtext-lexical": "latest",
     "graphql": "^16.8.1",
-    "next": "15.2.2",
+    "next": "^15.3.0",
     "nodemailer": "^6.10.0",
     "payload": "latest",
     "react": "18.2.0",

@@ -1,5 +1,5 @@
 // collections/Media.ts
-import { CollectionConfig } from 'payload/types'
+import { CollectionConfig } from 'payload'
 
 export const Media: CollectionConfig = {
   slug: 'media',
@@ -16,8 +16,7 @@ export const Media: CollectionConfig = {
     },
   },
   upload: {
-    staticURL: '/api/media',
-    staticDir: 'media',
+    // You can keep just the essential settings
     imageSizes: [
       {
         name: 'thumbnail',
@@ -34,7 +33,6 @@ export const Media: CollectionConfig = {
     ],
     adminThumbnail: 'thumbnail',
     mimeTypes: ['image/*'],
-    filesRequireAuth: false, // Allow public access to files
   },
   fields: [
     {
